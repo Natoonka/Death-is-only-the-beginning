@@ -10,7 +10,7 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     private PlayerControls playerControls;
 
-    public Animator animator;
+    public Animator animatorD, animatorE;
 
     private Queue<string> sentences;
     void Start()
@@ -18,10 +18,20 @@ public class DialogueManager : MonoBehaviour
         sentences = new Queue<string>();
     }
 
+    public void ShowThatInteractable()
+    {
+        animatorE.SetBool("canInteract", true);
+    }
+    public void HideThatInteractable()
+    {
+        animatorE.SetBool("canInteract", false);
+    }
+
     public void StartDialogue(Dialogue dialogue)
     {
         Cursor.visible = true;
-        animator.SetBool("isOpen", true);
+        animatorD.SetBool("isOpen", true);
+        animatorE.SetBool("canInteract", false);
 
         nameText.text = dialogue.name;
 
@@ -49,6 +59,6 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         Cursor.visible = false;
-        animator.SetBool("isOpen", false);
+        animatorD.SetBool("isOpen", false);
     }
 }

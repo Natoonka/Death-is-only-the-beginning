@@ -10,7 +10,10 @@ public class DialogueTrigger : MonoBehaviour
     {
         inputManager = InputManager.Instance;
     }
-
+    public void OnTriggerEnter(Collider other)
+    {
+        FindObjectOfType<DialogueManager>().ShowThatInteractable();
+    }
     public void OnTriggerStay(Collider other)
     {
         if(inputManager.PlayerInteracts())
@@ -19,7 +22,12 @@ public class DialogueTrigger : MonoBehaviour
         }
     }
 
-    public void TriggerDialogue()
+    private void OnTriggerExit(Collider other)
+    {
+        FindObjectOfType<DialogueManager>().HideThatInteractable();
+    }
+
+    virtual public void TriggerDialogue()
     {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
     }
